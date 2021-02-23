@@ -92,6 +92,7 @@ class UrlSoundConverterApp extends Homey.App {
   }
 
   async playMp3(buf, len) {
+    if(len<=900000) return this.playMp3Segment(buf);
     
     var info = await musicMeta.parseBuffer(buf, 'audio/mpeg', { duration: true });
     var duration = Number.parseInt(info.format.duration * 1000);
