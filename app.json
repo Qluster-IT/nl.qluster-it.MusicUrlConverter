@@ -1,8 +1,9 @@
 {
   "id": "nl.qluster-it.MusicUrlConverter",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "compatibility": ">=5.0.0",
   "sdk": 3,
+  "brandColor": "#4000C1",
   "name": {
     "en": "Music Url Converter",
     "nl": "Muziek Url Omzetter"
