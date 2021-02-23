@@ -8,8 +8,8 @@
     "nl": "Muziek Url Omzetter"
   },
   "description": {
-    "en": "Play Music URL's on Homey",
-    "nl": "Speel muziek URL's op Homey"
+    "en": "Play Music URL's on Homey bigger then 900 KB",
+    "nl": "Speel muziek URL's op Homey 900 KB"
   },
   "category": [
     "music"
@@ -19,6 +19,11 @@
     "large": "/assets/images/large.png",
     "small": "/assets/images/small.png"
   },
+  "source": "https://bitbucket.org/QlusterIT/nl.qluster-it.MusicUrlConverter/",
+  "bugs": {
+    "url": "https://bitbucket.org/QlusterIT/nl.qluster-it.MusicUrlConverter/issues"
+  },
+  "homeyCommunityTopicId": 43546,
   "author": {
     "name": "Arie J. Godschalk",
     "email": "arie@qluster-it.nl"

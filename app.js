@@ -3,12 +3,10 @@
 const Homey = require('homey');
 const { Defer } = require('./lib/proto');
 const fetch = require('node-fetch');
-const fs = require('fs');
 const mp3splitter = require('./lib/mp3splitter');
 const NodeID3 = require('node-id3')
 
 const musicMeta = require('music-metadata');
-const { log } = require('console');
 
 class UrlSoundConverterApp extends Homey.App {
   /**
@@ -25,7 +23,8 @@ class UrlSoundConverterApp extends Homey.App {
           console.log('play_url.registerRunListener args.url: ' + args.url);
           this.playUrl(args.url)
           .then((res)=>{
-            defer.resolve(true);
+            if(res===true) defer.resolve(res);
+            else defer.reject(res);
           })
           .catch((err)=>{
             defer.reject(err);
@@ -40,6 +39,9 @@ class UrlSoundConverterApp extends Homey.App {
   }
 
   async playUrl(url) {
+    this.ClearTimer();
+    // console.log(this.homey);
+    // console.log(Object.keys(this.homey));
     var response = await fetch(url);
     if (!response.ok) {
       throw new Error('Invalid Response');
@@ -47,39 +49,50 @@ class UrlSoundConverterApp extends Homey.App {
     var contentType = response.headers.get('content-type');
     console.log('contentType');
     console.log(contentType);
-    var buf = await response.buffer();
-    
-    var len = Buffer.byteLength(buf);
-    console.log(len);
-    //if(len>900000) return false;
 
+    var contentLength = response.headers.get('content-length');
+    console.log('contentLength');
+    console.log(contentLength);
+
+
+    //return;
+
+    //if(len>900000) return false;
+    var played = false;
     switch (contentType) {
       case 'audio/wav':
       case 'audio/x-wav':
-          console.log('playing wav'); //
-        return true;
-        if(len>900000) return false;
-        await this.homey.audio.playWav('nl.qluster-it.UrlSoundEater', buf);
-        await this.homey.audio.removeWav('nl.qluster-it.UrlSoundEater');
-        return true;
+        if(contentLength<=900000) {
+          var buf = await response.buffer();    
+          var len = Buffer.byteLength(buf);
+          if(len<=900000) {
+            console.log('playing wav length: ' + len); //            
+            //await this.homey.audio.playWav('nl.qluster-it.UrlSoundEater', buf);
+            //await this.homey.audio.removeWav('nl.qluster-it.UrlSoundEater');
+            played = true;
+          }          
+          buf = null;
+        } 
+        response = null;
+        global.gc();
       case 'audio/mpeg':
       case 'audio/mp3':
-          console.log('playing mp3'); //
-          await this.playMp3(buf, len);
-          buf = null;
-          response = null;
-          global.gc();
-        return true;
-        await this.homey.audio.playMp3('nl.qluster-it.UrlSoundEater', buf);
-        await this.homey.audio.removeMp3('nl.qluster-it.UrlSoundEater');
-        return true;
-      default:
-        return false;
+        console.log('playing mp3'); //              
+        if(contentLength<=15 * 1000000) {
+            var buf = await response.buffer();    
+            var len = Buffer.byteLength(buf);
+            await this.playMp3(buf, len);
+            played = true;
+            buf = null;
+            response = null;
+            global.gc();
+        }
     }
+    return played;
   }
 
   async playMp3(buf, len) {
-
+    
     var info = await musicMeta.parseBuffer(buf, 'audio/mpeg', { duration: true });
     var duration = Number.parseInt(info.format.duration * 1000);
 
@@ -134,8 +147,8 @@ class UrlSoundConverterApp extends Homey.App {
     if(this.segments && this.segments.length>0) {
       //console.log('segments');
       //console.log(this.segments[0]);
-      this.playMp3Segment(this.segments[0]);
-      if(this.segments.length>1)  {this.currentSegmentIndex++; this._setTimeout(durationParts);}
+      this.playMp3Segment(this.segments[this.currentSegmentIndex]);
+      if(this.segments.length>1)  {this.currentSegmentIndex++; this.SetTimeout(durationParts);}
     }
     
     
@@ -143,22 +156,33 @@ class UrlSoundConverterApp extends Homey.App {
     
     
   }
-  _setTimeout(time) {
-    if(this.timeout) clearTimeout(this.timeout);
+  SetTimeout(time) {
+    this.ClearTimer();
     this.timeout = setTimeout(()=> {
+      this.segments[this.currentSegmentIndex - 1] = null;      
       console.log('timeoutRunned: ' + this.currentSegmentIndex);
       this.playMp3Segment(this.segments[this.currentSegmentIndex]);
+      global.gc();
 
       if(this.segments && this.segments.length >this.currentSegmentIndex+1) {
         this.currentSegmentIndex++;
-        this._setTimeout(time);
-      } else console.log('timeoutRunned done');
+        this.SetTimeout(time);
+      } else {
+        this.segments = null;
+        global.gc();
+        console.log('timeoutRunned done');
+      }
     }, time) ;
   }
+  ClearTimer() {
+    if(this.timeout) clearTimeout(this.timeout);
+  }
+
 
   async playMp3Segment(segment) {
-    await this.homey.audio.playMp3('nl.qluster-it.UrlSoundEater', segment);
-    await this.homey.audio.removeMp3('nl.qluster-it.UrlSoundEater');
+    console.log('playMp3Segment ' + this.currentSegmentIndex);
+    //await this.homey.audio.playMp3('nl.qluster-it.UrlSoundEater', segment);
+    //await this.homey.audio.removeMp3('nl.qluster-it.UrlSoundEater');
   }
   
 }
