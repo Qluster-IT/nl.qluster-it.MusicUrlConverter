@@ -1,0 +1,49 @@
+{
+  "id": "nl.qluster-it.MusicUrlConverter",
+  "version": "0.0.1",
+  "compatibility": ">=5.0.0",
+  "sdk": 3,
+  "name": {
+    "en": "Music Url Converter",
+    "nl": "Muziek Url Omzetter"
+  },
+  "description": {
+    "en": "Play Music URL's on Homey",
+    "nl": "Speel muziek URL's op Homey"
+  },
+  "category": [
+    "music"
+  ],
+  "permissions": [],
+  "images": {
+    "large": "/assets/images/large.png",
+    "small": "/assets/images/small.png"
+  },
+  "author": {
+    "name": "Arie J. Godschalk",
+    "email": "arie@qluster-it.nl"
+  },
+  "flow": {
+    "actions" : [
+      {
+        "id": "play_url",
+        "title": {
+          "en": "Play URL",
+          "nl": "Speel URL"
+        },
+        "titleFormatted": {
+          "en": "Play [[url]] on Homey",
+          "nl": "Speel [[url]] op Homey"
+        },
+        "hint" : "URL",
+        "args": [          
+          {
+            "name": "url",
+            "type": "text",
+            "placeholder": "Url"
+          }
+        ]
+      }
+    ]
+  }
+}

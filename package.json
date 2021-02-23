@@ -1,0 +1,11 @@
+{
+  "name": "nl.qluster-it.UrlSoundEater",
+  "version": "0.0.1",
+  "main": "app.js",
+  "devDependencies": {
+    "homey": "^2.9.7"
+  },
+  "dependencies": {
+    "node-fetch": "^2.6.1"
+  }
+}
