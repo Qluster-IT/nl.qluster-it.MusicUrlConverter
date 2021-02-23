@@ -1,6 +1,6 @@
 {
   "id": "nl.qluster-it.MusicUrlConverter",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "compatibility": ">=5.0.0",
   "sdk": 3,
   "name": {
@@ -29,7 +29,7 @@
     "email": "arie@qluster-it.nl"
   },
   "flow": {
-    "actions" : [
+    "actions": [
       {
         "id": "play_url",
         "title": {
@@ -40,8 +40,8 @@
           "en": "Play [[url]] on Homey",
           "nl": "Speel [[url]] op Homey"
         },
-        "hint" : "URL",
-        "args": [          
+        "hint": "URL",
+        "args": [
           {
             "name": "url",
             "type": "text",
