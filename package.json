@@ -1,5 +1,5 @@
 {
-  "name": "nl.qluster-it.UrlSoundEater",
+  "name": "nl.qluster-it.MusicUrlConverter",
   "version": "0.0.1",
   "main": "app.js",
   "devDependencies": {
