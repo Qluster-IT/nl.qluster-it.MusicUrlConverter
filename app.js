@@ -67,8 +67,8 @@ class UrlSoundConverterApp extends Homey.App {
           var len = Buffer.byteLength(buf);
           if(len<=900000) {
             console.log('playing wav length: ' + len); //            
-            //await this.homey.audio.playWav('nl.qluster-it.UrlSoundEater', buf);
-            //await this.homey.audio.removeWav('nl.qluster-it.UrlSoundEater');
+            await this.homey.audio.playWav('nl.qluster-it.UrlSoundEater', buf);
+            await this.homey.audio.removeWav('nl.qluster-it.UrlSoundEater');
             played = true;
           }          
           buf = null;
@@ -170,7 +170,7 @@ class UrlSoundConverterApp extends Homey.App {
       } else {
         this.segments = null;
         global.gc();
-        console.log('timeoutRunned done');
+        //console.log('timeoutRunned done');
       }
     }, time) ;
   }
@@ -180,9 +180,9 @@ class UrlSoundConverterApp extends Homey.App {
 
 
   async playMp3Segment(segment) {
-    console.log('playMp3Segment ' + this.currentSegmentIndex);
-    //await this.homey.audio.playMp3('nl.qluster-it.UrlSoundEater', segment);
-    //await this.homey.audio.removeMp3('nl.qluster-it.UrlSoundEater');
+    //console.log('playMp3Segment ' + this.currentSegmentIndex);
+    await this.homey.audio.playMp3('nl.qluster-it.UrlSoundEater', segment);
+    await this.homey.audio.removeMp3('nl.qluster-it.UrlSoundEater');
   }
   
 }
