@@ -1,3 +1,3 @@
 # Url Sound Eater
 
-Play URL's on Homey
+Play URLs on Homey

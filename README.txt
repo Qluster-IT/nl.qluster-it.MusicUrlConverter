@@ -1,4 +1,4 @@
-Play MP3 and WAV directly on Homey from URL's.
+Play MP3 and WAV directly on Homey from URLs.
 Usefull for playing sound directly from UPnP servers or other network sources (that also might just be a bit to big).
 
 MP3 files bigger then 900 KB are split and executed right after another, with minimal interruptions.
