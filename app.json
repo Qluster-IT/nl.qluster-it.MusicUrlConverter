@@ -1,6 +1,6 @@
 {
   "id": "nl.qluster-it.MusicUrlConverter",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "compatibility": ">=5.0.0",
   "sdk": 3,
   "brandColor": "#4000C1",
@@ -9,8 +9,8 @@
     "nl": "Muziek Url Omzetter"
   },
   "description": {
-    "en": "Play Music URLs on Homey bigger then 900 KB",
-    "nl": "Speel muziek URL's op Homey 900 KB"
+    "en": "Play Music URLs on Homey larger then 900 KB",
+    "nl": "Speel muziek URL's op Homey groter dan 900 KB"
   },
   "category": [
     "music"
