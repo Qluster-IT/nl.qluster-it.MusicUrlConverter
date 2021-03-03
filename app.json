@@ -1,6 +1,6 @@
 {
   "id": "nl.qluster-it.MusicUrlConverter",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "compatibility": ">=5.0.0",
   "sdk": 3,
   "brandColor": "#4000C1",
@@ -19,6 +19,13 @@
   "images": {
     "large": "/assets/images/large.png",
     "small": "/assets/images/small.png"
+  },
+  "contributing": {
+    "donate": {
+      "paypal": {
+        "username": "paypal.me/QlusterIT"
+      }
+    }
   },
   "source": "https://bitbucket.org/QlusterIT/nl.qluster-it.MusicUrlConverter/",
   "bugs": {
