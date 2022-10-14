@@ -17,8 +17,8 @@ class UrlSoundConverterApp extends Homey.App {
 
     const play_url = this.homey.flow.getActionCard('play_url');
     play_url.registerRunListener(( ( args, state ) => { //async
+      var defer = new Defer();
       try {
-        var defer = new Defer();
           if(!args.url) return Promise.resolve(false);
           console.log('play_url.registerRunListener args.url: ' + args.url);
           this.playUrl(args.url)
