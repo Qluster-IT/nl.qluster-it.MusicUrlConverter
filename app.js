@@ -60,8 +60,10 @@ class UrlSoundConverterApp extends Homey.App {
     //if(len>900000) return false;
     var played = false;
     switch (contentType) {
+      case 'audio/wave':
       case 'audio/wav':
       case 'audio/x-wav':
+      case 'audio/x-wave':
         if(contentLength<=900000) {
           var buf = await response.buffer();    
           var len = Buffer.byteLength(buf);
@@ -75,6 +77,7 @@ class UrlSoundConverterApp extends Homey.App {
         } 
         response = null;
         global.gc();
+        break;
       case 'audio/mpeg':
       case 'audio/mp3':
         console.log('playing mp3'); //              
