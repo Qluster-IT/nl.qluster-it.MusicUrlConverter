@@ -28,5 +28,14 @@
   },
   "1.1.5": {
     "en": "Bugfixed"
+  },
+  "1.1.6": {
+    "en": "Bugfixed"
+  },
+  "1.1.7": {
+    "en": "Bugfixed"
+  },
+  "1.1.8": {
+    "en": "Added: Contribution options: Patreon and GithubSponsors (with PayPal already available)."
   }
 }
