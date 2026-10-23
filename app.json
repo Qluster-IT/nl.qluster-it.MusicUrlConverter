@@ -1,7 +1,9 @@
 {
   "id": "nl.qluster-it.MusicUrlConverter",
-  "version": "1.2.0",
+  "version": "1.2.2",
   "compatibility": ">=5.0.0",
+  "platforms":["local"],
+  "platformLocalRequiredFeatures": [ "speaker" ],
   "sdk": 3,
   "brandColor": "#4000C1",
   "name": {
@@ -37,9 +39,9 @@
       }
 		}
 	},
-  "source": "https://bitbucket.org/QlusterIT/nl.qluster-it.MusicUrlConverter/",
+  "source": "https://github.com/Qluster-IT/nl.qluster-it.MusicUrlConverter/",
   "bugs": {
-    "url": "https://bitbucket.org/QlusterIT/nl.qluster-it.MusicUrlConverter/issues"
+    "url": "https://github.com/Qluster-IT/nl.qluster-it.MusicUrlConverter/issues"
   },
   "homeyCommunityTopicId": 43546,
   "author": {
