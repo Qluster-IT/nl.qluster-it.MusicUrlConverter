@@ -40,6 +40,7 @@ class UrlSoundConverterApp extends Homey.App {
 
   async playUrl(url) {
     this.ClearTimer();
+    this.segments = null;
     // console.log(this.homey);
     // console.log(Object.keys(this.homey));
     var response = await fetch(url);
@@ -76,7 +77,6 @@ class UrlSoundConverterApp extends Homey.App {
           buf = null;
         } 
         response = null;
-        global.gc();
         break;
       case 'audio/mpeg':
       case 'audio/mp3':
@@ -88,7 +88,6 @@ class UrlSoundConverterApp extends Homey.App {
             played = true;
             buf = null;
             response = null;
-            global.gc();
         }
     }
     return played;
@@ -163,23 +162,28 @@ class UrlSoundConverterApp extends Homey.App {
   SetTimeout(time) {
     this.ClearTimer();
     this.timeout = setTimeout(()=> {
+      this.timeout = null;
       this.segments[this.currentSegmentIndex - 1] = null;      
       console.log('timeoutRunned: ' + this.currentSegmentIndex);
       this.playMp3Segment(this.segments[this.currentSegmentIndex]);
-      global.gc();
 
       if(this.segments && this.segments.length >this.currentSegmentIndex+1) {
         this.currentSegmentIndex++;
         this.SetTimeout(time);
       } else {
         this.segments = null;
-        global.gc();
         //console.log('timeoutRunned done');
       }
     }, time) ;
   }
   ClearTimer() {
     if(this.timeout) clearTimeout(this.timeout);
+    this.timeout = null;
+  }
+
+  onUninit() {
+    this.ClearTimer();
+    this.segments = null;
   }
 
 

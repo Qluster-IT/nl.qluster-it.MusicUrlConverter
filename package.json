@@ -2,6 +2,9 @@
   "name": "nl.qluster-it.MusicUrlConverter",
   "version": "0.0.1",
   "main": "app.js",
+  "scripts": {
+    "test": "node --test"
+  },
   "devDependencies": {
     "homey": "^2.9.7"
   },
