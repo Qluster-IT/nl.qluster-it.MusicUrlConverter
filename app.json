@@ -39,6 +39,7 @@
       }
 		}
 	},
+  "homepage": "https://github.com/Qluster-IT/nl.qluster-it.MusicUrlConverter/wiki",
   "source": "https://github.com/Qluster-IT/nl.qluster-it.MusicUrlConverter/",
   "bugs": {
     "url": "https://github.com/Qluster-IT/nl.qluster-it.MusicUrlConverter/issues"
